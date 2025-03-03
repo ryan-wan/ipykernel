@@ -34,7 +34,6 @@ from traitlets import (
 from .comm.comm import BaseComm
 from .comm.manager import CommManager
 from .compiler import XCachingCompiler
-from .debugger import _is_debugpy_available
 from .eventloops import _use_appnope
 from .iostream import OutStream
 from .kernelbase import Kernel as KernelBase
@@ -94,9 +93,7 @@ class IPythonKernel(KernelBase):
         help="Set this flag to False to deactivate the use of experimental IPython completion APIs.",
     ).tag(config=True)
 
-    debugpy_socket = (
-        Instance(zmq.asyncio.Socket, allow_none=True) if _is_debugpy_available else None
-    )
+    debugpy_socket = Instance(zmq.asyncio.Socket, allow_none=True)
 
     user_module = Any()
 
@@ -130,6 +127,7 @@ class IPythonKernel(KernelBase):
 
         self.executing_blocking_code_in_main_shell = False
 
+        from .debugger import _is_debugpy_available
         # Initialize the Debugger
         if _is_debugpy_available:
             self.debugger = self.debugger_class(
