@@ -34,7 +34,7 @@ from traitlets import (
 from .comm.comm import BaseComm
 from .comm.manager import CommManager
 from .compiler import XCachingCompiler
-from .debugger import Debugger, _is_debugpy_available
+from .debugger import _is_debugpy_available
 from .eventloops import _use_appnope
 from .iostream import OutStream
 from .kernelbase import Kernel as KernelBase
