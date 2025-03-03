@@ -34,6 +34,7 @@ from traitlets import (
 from .comm.comm import BaseComm
 from .comm.manager import CommManager
 from .compiler import XCachingCompiler
+from .debugger import _is_debugpy_available
 from .eventloops import _use_appnope
 from .iostream import OutStream
 from .kernelbase import Kernel as KernelBase
@@ -127,7 +128,7 @@ class IPythonKernel(KernelBase):
 
         self.executing_blocking_code_in_main_shell = False
 
-        from .debugger import _is_debugpy_available
+        
 
         # Initialize the Debugger
         if _is_debugpy_available:
